@@ -1,0 +1,15 @@
+.gridd {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    margin: 50px;
+}
+
+.image{
+    height: fit-content;
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+}
