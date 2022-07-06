@@ -14,22 +14,24 @@ export const ProductDetails = () => {
   console.log(product)
   console.log(productId)
 
-  const fetchProductsDetails = async () => {
-    const response = await axios
-      .get(`https://fakestoreapi.com/products/${productId}`)
-      .catch((err) => {
-        console.log("err", err)
-      })
-
-    dispatch(selectedProducts(response.data))
-
-
-  }
+  
 
   useEffect(() => {
-    if (productId && productId !== "") fetchProductsDetails()
+    const fetchProductsDetails = async () => {
+      const response = await axios
+        .get(`https://fakestoreapi.com/products/${productId}`)
+        .catch((err) => {
+          console.log("err", err)
+        })
+  
+      dispatch(selectedProducts(response.data))
+  
+  
+    }
+    fetchProductsDetails()
+    // if (productId && productId !== "") fetchProductsDetails()
 
-  }, [productId,])
+  }, [productId,dispatch])
 
 
 
@@ -44,12 +46,12 @@ export const ProductDetails = () => {
               <div className='ui vertical divider'>AND</div>
               <div className='middle aligned now'>
                 <div className='column lp'>
-                  <img src= {image} />
+                  <img src= {image} alt="hey"/>
                 </div>
                 <div className='column rp'>
                   <h1>{title}</h1>
                   <h2>
-                    <a className='ui teal tag label'>${price}</a>
+                    <p className='ui teal tag label'>${price}</p>
                   </h2>
                   <h3 className='ui brown block header'>{category}</h3>
                   <p>{description}</p>

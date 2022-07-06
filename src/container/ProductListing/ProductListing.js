@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import ProductComponent from '../../container/ProductComponent/ProductComponent'
 import { setProducts } from "../../redux/actions/productActions"
@@ -7,21 +7,26 @@ import "./ProductListing.css"
 
 const ProductListing = () => {
 
+    const [loader, setLoader] = useState(false)
+    const [errorHandling, setErrorHandling] = useState(false)
     const products = useSelector((state) => state)
     const dispatch = useDispatch()
 
-    const fetchProducts = async () => {
-        const response = await axios
-            .get("https://fakestoreapi.com/products")
-            .catch((err) => {
-                console.log("err", err)
-            })
-        dispatch(setProducts(response.data))
-    }
+
 
     useEffect(() => {
+        const fetchProducts = async () => {
+            setLoader(true)
+            const response = await axios.get("https://fakestoreapi.com/products")
+                .catch((err) => {
+                    console.log("err", err)
+                    setErrorHandling(true)
+                })
+                setLoader(false)
+            dispatch(setProducts(response.data))
+        }
         fetchProducts()
-    }, [])
+    }, [dispatch])
     console.log("Products ", products)
 
 
@@ -29,15 +34,19 @@ const ProductListing = () => {
 
     return (
         <>
-            <div>
+
+            {
+                errorHandling?"Errror" : loader ? "loading" :  <div>
 
 
-                <div className='gridd'>
-                    <ProductComponent />
+                    <div className='gridd'>
+                        <ProductComponent />
+                    </div>
+
+
                 </div>
+            }
 
-
-            </div>
         </>
     )
 }
