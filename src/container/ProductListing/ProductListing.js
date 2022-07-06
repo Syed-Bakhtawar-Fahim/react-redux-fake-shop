@@ -9,6 +9,7 @@ const ProductListing = () => {
 
     const products = useSelector((state) => state)
     const dispatch = useDispatch()
+
     const fetchProducts = async () => {
         const response = await axios
             .get("https://fakestoreapi.com/products")
@@ -29,13 +30,13 @@ const ProductListing = () => {
     return (
         <>
             <div>
-                {Object.keys(products).length === 0 ?
-                    (<div className='loader'>Loading the Products</div>) : (
-                        <div className='gridd'>
-                            <ProductComponent />
-                        </div>
-                    )
-                }
+
+
+                <div className='gridd'>
+                    <ProductComponent />
+                </div>
+
+
             </div>
         </>
     )

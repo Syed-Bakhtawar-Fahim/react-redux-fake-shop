@@ -15,12 +15,3 @@ export const Header = () => {
 
    )
 }
-
-
-   //   <Container>
-   //          <Navbar expand="lg" variant="light" bg="dark">
-   //             <Container>
-   //               <h1>Fake Shop</h1>
-   //             </Container>
-   //          </Navbar>
-   //       </Container>
